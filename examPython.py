@@ -81,6 +81,8 @@ def couleur_lettres(essai,cible):
                 else:
                     liste_couleur[i] = "J"
                     liste_occurences[ind_lettre] -= 1
+            else:
+                liste_couleur[i] = "B"
     return liste_couleur
 
 # Affiche un mot avec les lettres colorees selon le code fourni "R", "B" ou "J"
