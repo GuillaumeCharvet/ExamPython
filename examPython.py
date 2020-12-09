@@ -1,6 +1,14 @@
+from random import randint
 from colorama import init
 init()
 from colorama import Fore, Back, Style
+
+# Transformation d'une chaîne de caractères en liste de caractères
+def chaine2liste(mot):
+    liste = len(mot)*[""]
+    for i in range(len(mot)):
+        liste[i] = mot[i]
+    return liste
 
 # Renvoie l'indice d'apparition d'un caractère dans une liste en supposant qu'il apparaît une et une seule fois
 def indice_lettre(lettre,mot):
@@ -75,6 +83,26 @@ def couleur_lettres(essai,cible):
                     liste_occurences[ind_lettre] -= 1
     return liste_couleur
 
+# Affiche un mot avec les lettres colorees selon le code fourni "R", "B" ou "J"
+def affiche_lettres_couleurs(mot,couleurs):
+    for i in range(len(mot)):
+        if couleurs[i] == "R":
+            print(Back.RED + Fore.WHITE + mot[i], end="")
+        elif couleurs[i] == "B":
+            print(Back.BLUE + Fore.WHITE + mot[i], end="")
+        else:
+            print(Back.YELLOW + Fore.BLACK + mot[i], end="")
+    print("")
+    print(Style.RESET_ALL)
+    return()
+
+# Jeu principal
+# Définition des mots cibles possibles :
+mots_possibles = ["accord","brader","bruler","canyon","droite","fougue","genant","huitre","miasme","rototo"]
+
+mot1 = "totoro"
+print(chaine2liste(mot1))
+
 mot_cible = ["b","o","t","r","o","n"]
 mot_test = ["t","o","t","o","r","o"]
 print(lettre_dans_mot("o",mot_test))
@@ -85,7 +113,10 @@ print(indice_lettre("o",test))
 print(nombre_occurences_lettres(mot_test))
 print(couleur_lettres(mot_test,mot_cible))
 
+affiche_lettres_couleurs(mot_test,couleur_lettres(mot_test,mot_cible))
+
 print(6*["R"] == couleur_lettres(mot_cible,mot_cible))
+
 
 
 # print(Fore.RED + 'some red text', end=" ")
