@@ -18,9 +18,9 @@ def lettre_dans_mot(lettre,mot):
 
 # Renvoie une liste des lettres présentes dans le mot, sans répétition et dans leur ordre d'apparition
 def liste_lettres(mot):
-    liste = 6 * [""]
+    liste = len(mot) * [""]
     compteur = 0
-    for i in range(0,6):
+    for i in range(0,len(mot)):
         if not(lettre_dans_mot(mot[i],liste)):
             liste[compteur] = mot[i]
             compteur += 1
@@ -44,8 +44,38 @@ def nombre_occurences_lettres(mot):
         occurences[ind] += 1
     return occurences
 
+# Renvoie une liste comprenant le code couleur ("B","J" ou "R") des lettres du mot essai comparé au mot cible
+def couleur_lettres(essai,cible):
+    liste_couleur = len(cible) * [""]
+    liste_cible = liste_lettres(cible)
+    liste_occurences = nombre_occurences_lettres(cible)
+    # On réalise un premier parcours pour vérifier les lettres correctement positionnées
+    est_bien_placee = len(cible) * [False]
+    for i in range(0,len(cible)):
+        if essai[i] == cible[i]:
+            est_bien_placee[i] = True
+            liste_couleur[i] = "R"
+            ind_lettre = indice_lettre(essai[i],liste_cible)
+            liste_occurences[ind_lettre] -= 1
+    # Les lettres bien placées sont maintenant notées en rouge dans liste_couleur,
+    # leur emplacement est repérer dans est_bien_placee,
+    # et le nombre d'occurences de chaque lettre a été soustrait de liste_occurences.
+    #
+    # On recherche maintenant pour chaque lettre non rouge si elle apparaît tout de même dans le mot,
+    # si oui mais que toutes les occurences de cette lettre ont déjà été prises en compte ailleurs,
+    # alors elle sera laissée en bleu. Sinon elle passera en jaune.
+    for i in range(0,len(cible)):
+        if not(est_bien_placee[i]):
+            if lettre_dans_mot(essai[i],cible):
+                ind_lettre = indice_lettre(essai[i],liste_cible)
+                if liste_occurences[ind_lettre] == 0:
+                    liste_couleur[i] = "B"
+                else:
+                    liste_couleur[i] = "J"
+                    liste_occurences[ind_lettre] -= 1
+    return liste_couleur
 
-
+mot_cible = ["b","o","t","r","o","n"]
 mot_test = ["t","o","t","o","r","o"]
 print(lettre_dans_mot("o",mot_test))
 print(lettre_dans_mot("a",mot_test))
@@ -53,6 +83,9 @@ test = liste_lettres(mot_test)
 print(test)
 print(indice_lettre("o",test))
 print(nombre_occurences_lettres(mot_test))
+print(couleur_lettres(mot_test,mot_cible))
+
+print(6*["R"] == couleur_lettres(mot_cible,mot_cible))
 
 
 # print(Fore.RED + 'some red text', end=" ")
