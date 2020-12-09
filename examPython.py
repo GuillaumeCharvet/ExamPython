@@ -104,7 +104,7 @@ mots_possibles = ["accord","brader","bruler","canyon","droite","fougue","genant"
 # Choix du mot parmi ceux-ci :
 indice_mot_cible = randint(0,10)
 mot_cible = mots_possibles[indice_mot_cible]
-print(mot_cible)
+#print(mot_cible)
 l_cible = chaine2liste(mot_cible)
 #print(l_cible)
 print("Le jeu Motus commence !")
@@ -122,6 +122,8 @@ while not(gagne) and tour <8:
     else:   
         print("Bien tenté, mais non..")
         tour += 1
+    if tour == 8:
+        print("Désolé, vous n'avez plus de coups possibles...")
 
 # mot1 = "totoro"
 # print(chaine2liste(mot1))
