@@ -16,7 +16,7 @@ def lettre_dans_mot(lettre,mot):
             trouve = True
     return trouve
 
-# Renvoie une liste des lettres présentes dans le mot, sans répétition et dans leur ordre d'apparence
+# Renvoie une liste des lettres présentes dans le mot, sans répétition et dans leur ordre d'apparition
 def liste_lettres(mot):
     liste = 6 * [""]
     compteur = 0
@@ -34,12 +34,16 @@ def liste_lettres(mot):
         liste_finale[i] = liste[i]
     return liste_finale
 
-#
-# def nombre_occurences_lettres(mot):
-    # liste = liste_lettres(mot)
-    # nombre_lettres_diff = len(liste)
-    # occurences = nombre_lettres_diff * [0]
-    # for i in range 
+# Renvoie une liste correspondant au nombre d'occurences des lettres apparaissant dans mot, classées grâce à leur ordre d'apparition
+def nombre_occurences_lettres(mot):
+    liste = liste_lettres(mot)
+    nombre_lettres_diff = len(liste)
+    occurences = nombre_lettres_diff * [0]
+    for i in range(0,len(mot)):
+        ind = indice_lettre(mot[i],liste)
+        occurences[ind] += 1
+    return occurences
+
 
 
 mot_test = ["t","o","t","o","r","o"]
@@ -48,6 +52,7 @@ print(lettre_dans_mot("a",mot_test))
 test = liste_lettres(mot_test)
 print(test)
 print(indice_lettre("o",test))
+print(nombre_occurences_lettres(mot_test))
 
 
 # print(Fore.RED + 'some red text', end=" ")
