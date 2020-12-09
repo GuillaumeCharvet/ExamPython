@@ -99,23 +99,44 @@ def affiche_lettres_couleurs(mot,couleurs):
 # Jeu principal
 # Définition des mots cibles possibles :
 mots_possibles = ["accord","brader","bruler","canyon","droite","fougue","genant","huitre","miasme","rototo"]
+# Choix du mot parmi ceux-ci :
+indice_mot_cible = randint(0,10)
+mot_cible = mots_possibles[indice_mot_cible]
+print(mot_cible)
+l_cible = chaine2liste(mot_cible)
+#print(l_cible)
+print("Le jeu Motus commence !")
+tour = 0
+gagne = False
 
-mot1 = "totoro"
-print(chaine2liste(mot1))
+while not(gagne) and tour <8:
+    mot_test = input("Veuillez taper le mot à tester :")
+    l_test = chaine2liste(mot_test)
+    l_couleur = couleur_lettres(l_test,l_cible)
+    affiche_lettres_couleurs(l_test,l_couleur)
+    if len(mot_cible)*["R"] == l_couleur:
+        print("Félicitation, vous avez gagné !")
+        gagne = True
+    else:   
+        print("Bien tenté, mais non..")
+        tour += 1
 
-mot_cible = ["b","o","t","r","o","n"]
-mot_test = ["t","o","t","o","r","o"]
-print(lettre_dans_mot("o",mot_test))
-print(lettre_dans_mot("a",mot_test))
-test = liste_lettres(mot_test)
-print(test)
-print(indice_lettre("o",test))
-print(nombre_occurences_lettres(mot_test))
-print(couleur_lettres(mot_test,mot_cible))
+# mot1 = "totoro"
+# print(chaine2liste(mot1))
 
-affiche_lettres_couleurs(mot_test,couleur_lettres(mot_test,mot_cible))
+# mot_cible = ["b","o","t","r","o","n"]
+# mot_test = ["t","o","t","o","r","o"]
+# print(lettre_dans_mot("o",mot_test))
+# print(lettre_dans_mot("a",mot_test))
+# test = liste_lettres(mot_test)
+# print(test)
+# print(indice_lettre("o",test))
+# print(nombre_occurences_lettres(mot_test))
+# print(couleur_lettres(mot_test,mot_cible))
 
-print(6*["R"] == couleur_lettres(mot_cible,mot_cible))
+# affiche_lettres_couleurs(mot_test,couleur_lettres(mot_test,mot_cible))
+
+# print(6*["R"] == couleur_lettres(mot_cible,mot_cible))
 
 
 
